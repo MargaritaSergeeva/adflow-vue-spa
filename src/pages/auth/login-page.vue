@@ -1,91 +1,135 @@
 <script setup lang="ts">
-import { ArrowRight, ShieldCheck } from 'lucide-vue-next'
-import { reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useMutation } from '@tanstack/vue-query'
+import { toTypedSchema } from '@vee-validate/zod'
+import { useLocalStorage } from '@vueuse/core'
+import { ArrowRight, KeyRound, Mail } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
+import { z } from 'zod'
 
 import { useAuthStore } from '@/features/auth/model/auth.store'
+import AuthShell from '@/features/auth/ui/auth-shell.vue'
+import { loginRequest } from '@/shared/api/auth'
 import AppButton from '@/shared/ui/app-button.vue'
-import AppCard from '@/shared/ui/app-card.vue'
+import AppCheckbox from '@/shared/ui/app-checkbox.vue'
 import AppInput from '@/shared/ui/app-input.vue'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
-const form = reactive({
-  email: 'margarita@adflow.test',
-  password: 'AdFlow123!',
+const rememberedEmail = useLocalStorage('adflow-remembered-email', '')
+const rememberMe = useLocalStorage('adflow-remember-me', true)
+const submitError = ref('')
+
+const schema = toTypedSchema(
+  z.object({
+    email: z.string().trim().email({ message: 'auth.validation.email' }),
+    password: z
+      .string()
+      .min(8, { message: 'auth.validation.passwordLength' })
+      .regex(/[A-Z]/, { message: 'auth.validation.passwordUppercase' })
+      .regex(/[0-9]/, { message: 'auth.validation.passwordNumber' }),
+  }),
+)
+
+const { defineField, errors, handleSubmit } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    email: rememberedEmail.value,
+    password: '',
+  },
 })
 
-function submit() {
-  if (!form.email || !form.password) return
+const [email, emailAttrs] = defineField('email')
+const [password, passwordAttrs] = defineField('password')
 
-  authStore.login()
-  router.push((route.query.redirect as string | undefined) ?? '/dashboard')
-}
+const loginMutation = useMutation({
+  mutationFn: loginRequest,
+})
+
+const submit = handleSubmit(async (values) => {
+  submitError.value = ''
+
+  const result = await loginMutation.mutateAsync(values)
+
+  if (!result.ok || !result.user) {
+    submitError.value = t(result.message ?? 'auth.errors.invalidCredentials')
+    return
+  }
+
+  authStore.setUser(result.user)
+  rememberedEmail.value = rememberMe.value ? values.email : ''
+  locale.value = result.user.locale
+  localStorage.setItem('adflow-locale', result.user.locale)
+
+  await router.replace((route.query.redirect as string | undefined) ?? '/dashboard')
+})
 </script>
 
 <template>
-  <div class="grid min-h-screen place-items-center bg-[var(--color-bg)] px-4 py-10">
-    <div class="grid w-full max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <AppCard
-        class="overflow-hidden bg-[linear-gradient(135deg,#0b1730_0%,#18439e_45%,#2da8ff_100%)] text-white"
+  <AuthShell
+    :eyebrow="t('auth.eyebrow')"
+    :title="t('auth.heroTitle')"
+    :description="t('auth.heroText')"
+    :panel-title="t('auth.signIn')"
+    :panel-subtitle="t('auth.welcomeBack')"
+    :footer-prompt="t('auth.noAccount')"
+    :footer-action-label="t('auth.createAccount')"
+    footer-action-to="/register"
+    :footer-secondary-label="t('auth.forgotPassword')"
+    footer-secondary-to="/forgot-password"
+  >
+    <form class="space-y-5" @submit.prevent="submit">
+      <AppInput
+        v-model="email"
+        v-bind="emailAttrs"
+        type="email"
+        autocomplete="email"
+        :label="t('auth.email')"
+        :placeholder="t('auth.placeholders.email')"
+        :icon="Mail"
+        :error="errors.email ? t(errors.email) : ''"
+      />
+
+      <AppInput
+        v-model="password"
+        v-bind="passwordAttrs"
+        type="password"
+        autocomplete="current-password"
+        :label="t('auth.password')"
+        :placeholder="t('auth.placeholders.password')"
+        :icon="KeyRound"
+        :error="errors.password ? t(errors.password) : ''"
+        :hint="t('auth.passwordHint')"
+      />
+
+      <div class="flex items-center gap-4">
+        <AppCheckbox
+          v-model="rememberMe"
+          :label="t('auth.rememberMe')"
+          :description="t('auth.rememberMeHint')"
+        />
+      </div>
+
+      <div
+        v-if="submitError"
+        class="rounded-[24px] border border-[color:rgb(216_58_50_/_18%)] bg-[color:rgb(216_58_50_/_8%)] px-4 py-3 text-sm font-medium text-(--color-danger)"
       >
-        <div class="flex h-full flex-col justify-between gap-10 p-8 md:p-10">
-          <div class="space-y-4">
-            <span
-              class="inline-flex w-fit rounded-full bg-white/14 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/82"
-            >
-              AdFlow
-            </span>
-            <h1 class="max-w-xl text-4xl font-extrabold leading-tight md:text-6xl">
-              {{ t('auth.heroTitle') }}
-            </h1>
-            <p class="max-w-lg text-base leading-7 text-white/76 md:text-lg">
-              {{ t('auth.heroText') }}
-            </p>
-          </div>
+        {{ submitError }}
+      </div>
 
-          <div class="grid gap-4 md:grid-cols-3">
-            <div class="rounded-3xl border border-white/12 bg-white/10 p-4 backdrop-blur-md">
-              <p class="text-sm text-white/60">CTR uplift</p>
-              <p class="mt-2 text-3xl font-bold">+18.4%</p>
-            </div>
-            <div class="rounded-3xl border border-white/12 bg-white/10 p-4 backdrop-blur-md">
-              <p class="text-sm text-white/60">Active campaigns</p>
-              <p class="mt-2 text-3xl font-bold">126</p>
-            </div>
-            <div class="rounded-3xl border border-white/12 bg-white/10 p-4 backdrop-blur-md">
-              <p class="text-sm text-white/60">Daily spend</p>
-              <p class="mt-2 text-3xl font-bold">$24.8k</p>
-            </div>
-          </div>
-        </div>
-      </AppCard>
-
-      <AppCard class="mx-auto flex w-full max-w-xl flex-col justify-center p-8 md:p-10">
-        <div class="mb-8 flex items-center gap-3">
-          <span class="rounded-2xl bg-[var(--color-accent-soft)] p-3 text-[var(--color-accent)]">
-            <ShieldCheck :size="20" />
-          </span>
-          <div>
-            <p class="text-sm text-[var(--color-text-secondary)]">{{ t('auth.welcomeBack') }}</p>
-            <h2 class="text-2xl font-bold">{{ t('auth.signIn') }}</h2>
-          </div>
-        </div>
-
-        <form class="space-y-4" @submit.prevent="submit">
-          <AppInput v-model="form.email" type="email" :label="t('auth.email')" />
-          <AppInput v-model="form.password" type="password" :label="t('auth.password')" />
-
-          <AppButton type="submit" class="w-full justify-center gap-2">
-            {{ t('auth.enterWorkspace') }}
-            <ArrowRight :size="16" />
-          </AppButton>
-        </form>
-      </AppCard>
-    </div>
-  </div>
+      <AppButton
+        type="submit"
+        :disabled="loginMutation.isPending.value"
+        class="w-full justify-center gap-2"
+      >
+        {{ loginMutation.isPending.value ? '...' : t('auth.enterWorkspace') }}
+        <ArrowRight :size="16" />
+      </AppButton>
+    </form>
+  </AuthShell>
 </template>

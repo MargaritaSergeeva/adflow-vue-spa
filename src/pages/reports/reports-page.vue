@@ -21,8 +21,8 @@ const metrics = [
     <div class="page-heading">
       <div class="space-y-2">
         <AppBadge tone="success">{{ t('reports.badge') }}</AppBadge>
-        <h1 class="text-3xl font-extrabold">{{ t('reports.title') }}</h1>
-        <p class="max-w-2xl text-sm text-[var(--color-text-secondary)] md:text-base">
+        <h1 class="text-3xl font-semibold">{{ t('reports.title') }}</h1>
+        <p class="max-w-2xl text-sm text-(--color-text-secondary) md:text-base">
           {{ t('reports.subtitle') }}
         </p>
       </div>
@@ -30,20 +30,20 @@ const metrics = [
 
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       <AppCard v-for="metric in metrics" :key="metric.label" class="flex flex-col gap-4 p-5">
-        <p class="text-sm text-[var(--color-text-secondary)]">{{ metric.label }}</p>
-        <p class="text-3xl font-bold">{{ metric.value }}</p>
+        <p class="text-sm text-(--color-text-secondary)">{{ metric.label }}</p>
+        <p class="text-3xl font-semibold">{{ metric.value }}</p>
       </AppCard>
     </div>
 
     <AppCard class="p-6">
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 class="text-xl font-bold">{{ t('reports.exportTitle') }}</h2>
-          <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+          <h2 class="text-xl font-semibold">{{ t('reports.exportTitle') }}</h2>
+          <p class="mt-2 text-sm text-(--color-text-secondary)">
             {{ t('reports.exportText') }}
           </p>
         </div>
-        <button class="rounded-full bg-[var(--color-accent)] px-5 py-3 font-semibold text-white">
+        <button class="rounded-full bg-(--color-accent) px-5 py-3 font-semibold text-white">
           {{ t('reports.export') }}
         </button>
       </div>

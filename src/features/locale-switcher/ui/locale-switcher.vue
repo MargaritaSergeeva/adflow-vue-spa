@@ -12,7 +12,7 @@ function setLocale(nextLocale: 'ru' | 'en') {
 </script>
 
 <template>
-  <div class="flex items-center gap-2 rounded-full bg-[var(--color-surface-alt)] p-1">
+  <div class="flex items-center gap-2 rounded-full bg-(--color-surface-alt) p-1">
     <AppButton
       size="sm"
       :variant="locale === 'ru' ? 'primary' : 'ghost'"

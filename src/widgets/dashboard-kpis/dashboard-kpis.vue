@@ -35,10 +35,10 @@ const items = computed(() => [
     <AppCard v-for="item in items" :key="item.label" class="p-5">
       <div class="flex items-start justify-between gap-3">
         <div>
-          <p class="text-sm text-[var(--color-text-secondary)]">{{ item.label }}</p>
-          <p class="mt-4 text-3xl font-extrabold">{{ item.value }}</p>
+          <p class="text-sm text-(--color-text-secondary)">{{ item.label }}</p>
+          <p class="mt-4 text-3xl font-semibold">{{ item.value }}</p>
         </div>
-        <span class="rounded-2xl bg-[var(--color-accent-soft)] p-3 text-[var(--color-accent)]">
+        <span class="rounded-2xl bg-(--color-accent-soft) p-3 text-(--color-accent)">
           <component :is="item.icon" :size="18" />
         </span>
       </div>

@@ -18,6 +18,22 @@ const router = createRouter({
       },
     },
     {
+      path: '/register',
+      name: 'register',
+      component: () => import('@/pages/auth/register-page.vue'),
+      meta: {
+        guestOnly: true,
+      },
+    },
+    {
+      path: '/forgot-password',
+      name: 'forgot-password',
+      component: () => import('@/pages/auth/forgot-password-page.vue'),
+      meta: {
+        guestOnly: true,
+      },
+    },
+    {
       path: '/',
       component: () => import('@/app/layouts/default-layout.vue'),
       meta: {
@@ -33,6 +49,9 @@ const router = createRouter({
           path: 'campaigns',
           name: 'campaigns',
           component: () => import('@/pages/campaigns/campaigns-page.vue'),
+          meta: {
+            roles: ['admin', 'manager'],
+          },
         },
         {
           path: 'reports',
