@@ -1,0 +1,43 @@
+import type { Campaign } from '@/entities/campaign/model/types'
+
+export const campaigns: Campaign[] = [
+  {
+    id: 'cmp-001',
+    name: 'Spring Search Acceleration',
+    channel: 'search',
+    status: 'active',
+    budget: 42000,
+    spent: 28640,
+    ctr: 4.3,
+    conversions: 482,
+    owner: 'Margarita Sergeeva',
+    startDate: '2026-04-01',
+    endDate: '2026-05-14',
+  },
+  {
+    id: 'cmp-002',
+    name: 'B2B Retargeting Pulse',
+    channel: 'programmatic',
+    status: 'paused',
+    budget: 27000,
+    spent: 19110,
+    ctr: 2.8,
+    conversions: 214,
+    owner: 'Emilia Wren',
+    startDate: '2026-03-20',
+    endDate: '2026-04-30',
+  },
+  {
+    id: 'cmp-003',
+    name: 'Creative Refresh Rollout',
+    channel: 'social',
+    status: 'draft',
+    budget: 18500,
+    spent: 4200,
+    ctr: 3.9,
+    conversions: 88,
+    owner: 'Alex Markov',
+    startDate: '2026-04-16',
+    endDate: '2026-06-02',
+  },
+]

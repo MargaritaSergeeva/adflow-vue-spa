@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+. "$HOME/.nvm/nvm.sh"
+nvm use 22 >/dev/null
+
+yarn lint
+yarn lint:styles
