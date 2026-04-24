@@ -24,6 +24,7 @@ const { t, locale } = useI18n()
 const rememberedEmail = useLocalStorage('adflow-remembered-email', '')
 const rememberMe = useLocalStorage('adflow-remember-me', true)
 const submitError = ref('')
+const defaultPassword = 'AdFlow123!'
 
 const schema = toTypedSchema(
   z.object({
@@ -40,7 +41,7 @@ const { defineField, errors, handleSubmit } = useForm({
   validationSchema: schema,
   initialValues: {
     email: rememberedEmail.value,
-    password: '',
+    password: defaultPassword,
   },
 })
 

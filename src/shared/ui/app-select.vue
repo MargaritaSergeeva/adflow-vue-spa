@@ -44,7 +44,7 @@ const emit = defineEmits<{
       <SelectTrigger
         :class="
           cn(
-            'flex h-[50px] w-full items-center justify-between rounded-[10px] border bg-(--color-surface-alt) px-4 text-left text-sm text-(--color-text-primary) outline-none transition data-[placeholder]:text-(--color-text-secondary)',
+            'flex h-[50px] w-full items-center justify-between rounded-[16px] border bg-(--color-surface-alt) px-4 text-left text-sm text-(--color-text-primary) outline-none transition data-[placeholder]:text-(--color-text-secondary)',
             error
               ? 'border-(--color-danger)'
               : 'border-(--color-border) focus:border-(--color-accent)',
@@ -60,7 +60,7 @@ const emit = defineEmits<{
         <SelectContent
           position="popper"
           :side-offset="10"
-          class="z-50 overflow-hidden rounded-[10px] border border-(--color-border) bg-(--color-surface) p-2 shadow-(--shadow-soft)"
+          class="z-50 overflow-hidden rounded-[18px] border border-(--color-border) bg-(--color-surface) p-2 shadow-(--shadow-soft)"
         >
           <SelectViewport class="grid gap-1">
             <SelectItem

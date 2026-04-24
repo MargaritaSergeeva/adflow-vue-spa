@@ -21,7 +21,7 @@ const props = withDefaults(
 
 const classes = computed(() =>
   cn(
-    'inline-flex items-center rounded-full border font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2',
+    'inline-flex cursor-pointer items-center rounded-full border font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2',
     props.size === 'sm' ? 'px-3.5 py-2 text-sm' : 'px-5 py-3 text-sm',
     {
       'border-(--color-accent) bg-(--color-accent) text-white hover:bg-(--color-accent-strong)':

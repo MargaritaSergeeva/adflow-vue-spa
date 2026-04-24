@@ -6,3 +6,4 @@ playwright-report
 test-results
 .husky/_
 _bootstrap/
+yarn-error.log

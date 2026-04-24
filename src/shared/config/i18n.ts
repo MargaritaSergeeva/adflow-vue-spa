@@ -11,7 +11,7 @@ const messages = {
         'Единая консоль для команд, бюджетов, аналитики и ежедневных решений по кампаниям.',
       registerHeroTitle: 'Запускайте workspace для команды, ролей и рекламных операций',
       registerHeroText:
-        'Регистрация создаёт стартовую среду для ad ops, аналитики и role-based доступа без лишней ручной рутины.',
+        'Создайте рабочее пространство для команды, доступов и ежедневных рекламных операций.',
       recoveryHeroTitle: 'Восстановите доступ к рабочему пространству без потери контекста',
       recoveryHeroText:
         'Подготовили безопасный сценарий восстановления, чтобы быстро вернуть команде доступ к данным и кампаниям.',
@@ -48,6 +48,35 @@ const messages = {
       backToLoginPrompt: 'Вернуться к форме входа?',
       demoAccess: 'Демо-доступы',
       demoPassword: 'Пароль для входа: {password}',
+      slider: {
+        badge: 'AdFlow Console',
+        slides: [
+          {
+            kicker: 'Unified workspace',
+            title: 'Контролируйте рекламные операции из одного пространства',
+            description:
+              'Собирайте кампании, команды и повседневные ad ops-процессы в едином рабочем интерфейсе.',
+          },
+          {
+            kicker: 'Scale & visibility',
+            title: 'Масштабируйте каналы без потери прозрачности',
+            description:
+              'Следите за доступами, рабочими сценариями и производительностью кампаний, когда команд и аккаунтов становится больше.',
+          },
+          {
+            kicker: 'Security controls',
+            title: 'Держите безопасность и доступы под контролем',
+            description:
+              'Разделяйте роли, защищайте workspace и сокращайте риск ручных ошибок в ежедневной работе.',
+          },
+          {
+            kicker: 'Team alignment',
+            title: 'Синхронизируйте команду вокруг роста, а не рутины',
+            description:
+              'Планирование, согласование и execution live-кампаний должны ощущаться как единый продуктовый поток.',
+          },
+        ],
+      },
       securityTitle: 'Auth foundation',
       securityText: 'Вход, регистрация, восстановление и role-based access уже готовы.',
       timezoneHint: 'Используется в отчётах, расписаниях и времени уведомлений.',
@@ -116,7 +145,7 @@ const messages = {
       badge: 'Командный обзор',
       title: 'Ad operations control center',
       subtitle:
-        'Первая версия foundation уже показывает стиль, архитектуру и data-first подход будущего продукта.',
+        'Следите за ключевыми метриками, динамикой кампаний и рабочими приоритетами команды.',
       insights: 'Быстрые инсайты',
       nextActions: 'Следующие действия',
       actions: [
@@ -129,7 +158,7 @@ const messages = {
       badge: 'Campaigns pipeline',
       title: 'Список кампаний',
       subtitle:
-        'Стартовый экран уже готов под фильтрацию, сортировку и дальнейшую интеграцию с реалистичными моками.',
+        'Управляйте кампаниями, отслеживайте статус размещений и держите под рукой основные показатели.',
       create: 'Создать кампанию',
       search: 'Поиск',
       searchPlaceholder: 'Название, канал или владелец',
@@ -138,14 +167,14 @@ const messages = {
       badge: 'Analytics layer',
       title: 'Отчёты и экспорт',
       subtitle:
-        'На этом этапе закладываем метрики, narrative analytics и основу под экспортные сценарии.',
+        'Собирайте сводку по эффективности и выгружайте данные для дальнейшего анализа.',
       exportTitle: 'Экспорт отчёта',
-      exportText: 'CSV-export добавим на следующем шаге вместе с mock API и query-моделями.',
+      exportText: 'Подготовьте выгрузку данных и используйте её для командной аналитики и отчётности.',
       export: 'Экспортировать CSV',
     },
     topbar: {
       workspace: 'Основной workspace',
-      search: 'Поиск по сущностям, людям и отчётам',
+      search: 'Поиск',
     },
   },
   en: {
@@ -156,7 +185,7 @@ const messages = {
         'A focused control center for teams, budgets, analytics, and campaign decisions.',
       registerHeroTitle: 'Launch a workspace for teams, roles, and campaign operations',
       registerHeroText:
-        'Registration creates a product-ready space for ad ops, analytics, and role-based access without manual setup.',
+        'Create a workspace for your team, access control, and everyday campaign operations.',
       recoveryHeroTitle: 'Restore access to your workspace without losing campaign context',
       recoveryHeroText:
         'The recovery flow helps your team regain access to dashboards, reports, and controls in a safe product-like way.',
@@ -193,6 +222,35 @@ const messages = {
       backToLoginPrompt: 'Return to the sign-in form?',
       demoAccess: 'Demo access',
       demoPassword: 'Demo password: {password}',
+      slider: {
+        badge: 'AdFlow Console',
+        slides: [
+          {
+            kicker: 'Unified workspace',
+            title: 'Run ad operations from one unified workspace',
+            description:
+              'Bring campaigns, teams, and daily ad ops workflows into a single product environment.',
+          },
+          {
+            kicker: 'Scale & visibility',
+            title: 'Scale channels without losing visibility',
+            description:
+              'Track access, operational flows, and campaign performance as your accounts and teams grow.',
+          },
+          {
+            kicker: 'Security controls',
+            title: 'Keep security and permissions under control',
+            description:
+              'Separate roles, protect the workspace, and reduce the cost of manual mistakes in everyday execution.',
+          },
+          {
+            kicker: 'Team alignment',
+            title: 'Align the team around growth, not routine',
+            description:
+              'Planning, approvals, and live campaign execution should feel like one cohesive product flow.',
+          },
+        ],
+      },
       securityTitle: 'Auth foundation',
       securityText: 'Sign in, registration, recovery, and role-based access are all wired in.',
       timezoneHint: 'Used for reports, schedules, and notification timing.',
@@ -261,7 +319,7 @@ const messages = {
       badge: 'Team overview',
       title: 'Ad operations control center',
       subtitle:
-        'This first foundation already shows the visual system, architecture, and data-first direction of the product.',
+        'Track key metrics, campaign movement, and the team’s current priorities in one place.',
       insights: 'Quick insights',
       nextActions: 'Next actions',
       actions: [
@@ -274,7 +332,7 @@ const messages = {
       badge: 'Campaigns pipeline',
       title: 'Campaign list',
       subtitle:
-        'The first list view is already ready for filters, sorting, and richer mock integrations.',
+        'Manage campaigns, monitor delivery status, and keep core performance signals close at hand.',
       create: 'Create campaign',
       search: 'Search',
       searchPlaceholder: 'Name, channel, or owner',
@@ -283,15 +341,15 @@ const messages = {
       badge: 'Analytics layer',
       title: 'Reports and export',
       subtitle:
-        'This stage establishes metrics, narrative analytics, and the foundation for export workflows.',
+        'Review performance summaries and prepare exports for further analysis and reporting.',
       exportTitle: 'Report export',
       exportText:
-        'CSV export will be added in the next iteration together with mock API and query models.',
+        'Prepare a data export for team reporting, operational reviews, and deeper analysis.',
       export: 'Export CSV',
     },
     topbar: {
       workspace: 'Primary workspace',
-      search: 'Search entities, people, and reports',
+      search: 'Search',
     },
   },
 }

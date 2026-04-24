@@ -8,7 +8,7 @@ const { isDark, toggleTheme } = useTheme()
 </script>
 
 <template>
-  <AppButton variant="secondary" size="sm" class="gap-2" @click="toggleTheme">
+  <AppButton variant="ghost" size="sm" class="gap-2 px-0 hover:bg-transparent" @click="toggleTheme">
     <SunMedium v-if="!isDark" :size="16" />
     <MoonStar v-else :size="16" />
     {{ isDark ? 'Light' : 'Dark' }}

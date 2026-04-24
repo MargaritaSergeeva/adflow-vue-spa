@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/vue-query'
 import { toTypedSchema } from '@vee-validate/zod'
 import { ArrowRight, BriefcaseBusiness, Globe, KeyRound, Mail, ShieldCheck, User2 } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { z } from 'zod'
@@ -13,7 +13,6 @@ import AuthShell from '@/features/auth/ui/auth-shell.vue'
 import { registerRequest } from '@/shared/api/auth'
 import AppButton from '@/shared/ui/app-button.vue'
 import AppInput from '@/shared/ui/app-input.vue'
-import AppSelect from '@/shared/ui/app-select.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -32,8 +31,6 @@ const schema = toTypedSchema(
       confirmPassword: z.string(),
       companyName: z.string().trim().min(2, { message: 'auth.validation.companyName' }),
       workspaceTitle: z.string().trim().min(2, { message: 'auth.validation.workspaceTitle' }),
-      role: z.enum(['admin', 'manager', 'viewer']),
-      locale: z.enum(['ru', 'en']),
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: 'auth.validation.passwordMismatch',
@@ -50,8 +47,6 @@ const { defineField, errors, handleSubmit } = useForm({
     confirmPassword: '',
     companyName: '',
     workspaceTitle: '',
-    role: 'manager',
-    locale: locale.value === 'en' ? 'en' : 'ru',
   },
 })
 
@@ -61,26 +56,6 @@ const [password, passwordAttrs] = defineField('password')
 const [confirmPassword, confirmPasswordAttrs] = defineField('confirmPassword')
 const [companyName, companyNameAttrs] = defineField('companyName')
 const [workspaceTitle, workspaceTitleAttrs] = defineField('workspaceTitle')
-const [role] = defineField('role')
-const [localeField] = defineField('locale')
-
-watch(
-  () => locale.value,
-  (nextLocale) => {
-    localeField.value = nextLocale === 'en' ? 'en' : 'ru'
-  },
-)
-
-const roleOptions = computed(() => [
-  { value: 'admin', label: t('roles.admin') },
-  { value: 'manager', label: t('roles.manager') },
-  { value: 'viewer', label: t('roles.viewer') },
-])
-
-const localeOptions = computed(() => [
-  { value: 'ru', label: t('auth.languages.ru') },
-  { value: 'en', label: t('auth.languages.en') },
-])
 
 const registerMutation = useMutation({
   mutationFn: registerRequest,
@@ -93,8 +68,6 @@ const submit = handleSubmit(async (values) => {
     password: values.password,
     companyName: values.companyName,
     workspaceTitle: values.workspaceTitle,
-    role: values.role,
-    locale: values.locale,
   })
 
   if (!result.ok || !result.user) {
@@ -188,22 +161,6 @@ const submitError = computed(() => {
           :placeholder="t('auth.placeholders.workspaceTitle')"
           :icon="Globe"
           :error="errors.workspaceTitle ? t(errors.workspaceTitle) : ''"
-        />
-      </div>
-
-      <div class="grid gap-4 md:grid-cols-2">
-        <AppSelect
-          v-model="role"
-          :label="t('auth.role')"
-          :placeholder="t('auth.role')"
-          :options="roleOptions"
-          :error="errors.role ? t(errors.role) : ''"
-        />
-        <AppSelect
-          v-model="localeField"
-          :label="t('auth.interfaceLanguage')"
-          :placeholder="t('auth.interfaceLanguage')"
-          :options="localeOptions"
         />
       </div>
 
