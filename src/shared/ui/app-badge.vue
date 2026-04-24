@@ -14,9 +14,9 @@ const props = withDefaults(
 
 const toneClass = computed(() =>
   ({
-    neutral: 'bg-[var(--color-surface-alt)] text-[var(--color-text-secondary)]',
-    info: 'bg-[var(--color-accent-soft)] text-[var(--color-accent)]',
-    success: 'bg-[rgb(15_159_105_/_12%)] text-[var(--color-success)]',
+    neutral: 'bg-(--color-surface-alt) text-(--color-text-secondary)',
+    info: 'bg-(--color-accent-soft) text-(--color-accent)',
+    success: 'bg-[rgb(15_159_105_/_12%)] text-(--color-success)',
   })[props.tone],
 )
 </script>
@@ -25,7 +25,7 @@ const toneClass = computed(() =>
   <span
     :class="
       cn(
-        'inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em]',
+        'inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em]',
         toneClass,
       )
     "

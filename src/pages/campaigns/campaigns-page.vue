@@ -23,8 +23,8 @@ const filteredCampaigns = computed(() =>
     <div class="page-heading">
       <div class="space-y-2">
         <AppBadge tone="info">{{ t('campaigns.badge') }}</AppBadge>
-        <h1 class="text-3xl font-extrabold">{{ t('campaigns.title') }}</h1>
-        <p class="max-w-2xl text-sm text-[var(--color-text-secondary)] md:text-base">
+        <h1 class="text-3xl font-semibold">{{ t('campaigns.title') }}</h1>
+        <p class="max-w-2xl text-sm text-(--color-text-secondary) md:text-base">
           {{ t('campaigns.subtitle') }}
         </p>
       </div>

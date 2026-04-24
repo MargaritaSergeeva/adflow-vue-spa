@@ -1,3 +1,4 @@
+import type { UserRole } from '@/entities/user/model/types'
 import type { LucideIcon } from 'lucide-vue-next'
 import { BarChart3, LayoutDashboard, Settings2 } from 'lucide-vue-next'
 
@@ -5,6 +6,7 @@ export interface NavigationItem {
   key: 'dashboard' | 'campaigns' | 'reports' | 'settings'
   icon: LucideIcon
   to: string
+  roles?: UserRole[]
 }
 
 export const navigationItems: NavigationItem[] = [
@@ -17,6 +19,7 @@ export const navigationItems: NavigationItem[] = [
     key: 'campaigns',
     icon: BarChart3,
     to: '/campaigns',
+    roles: ['admin', 'manager'],
   },
   {
     key: 'reports',

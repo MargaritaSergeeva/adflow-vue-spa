@@ -18,3 +18,12 @@ export const currentWorkspace: Workspace = {
   currency: 'USD',
   brandColor: '#2570ff',
 }
+
+export const guestWorkspace: Workspace = {
+  id: 'wrk-guest',
+  title: 'AdFlow Console',
+  companyName: 'Guest workspace',
+  timezone: 'Europe/Moscow',
+  currency: 'USD',
+  brandColor: '#2570ff',
+}

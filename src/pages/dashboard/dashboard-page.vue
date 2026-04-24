@@ -18,8 +18,8 @@ const { t, tm } = useI18n()
           <Sparkles :size="12" />
           {{ t('dashboard.badge') }}
         </AppBadge>
-        <h1 class="text-3xl font-extrabold md:text-4xl">{{ t('dashboard.title') }}</h1>
-        <p class="max-w-2xl text-sm text-[var(--color-text-secondary)] md:text-base">
+        <h1 class="text-3xl font-semibold md:text-4xl">{{ t('dashboard.title') }}</h1>
+        <p class="max-w-2xl text-sm text-(--color-text-secondary) md:text-base">
           {{ t('dashboard.subtitle') }}
         </p>
       </div>
@@ -32,15 +32,15 @@ const { t, tm } = useI18n()
 
       <AppCard class="flex flex-col gap-5 p-5">
         <div>
-          <p class="text-sm text-[var(--color-text-secondary)]">{{ t('dashboard.insights') }}</p>
-          <h2 class="mt-2 text-xl font-bold">{{ t('dashboard.nextActions') }}</h2>
+          <p class="text-sm text-(--color-text-secondary)">{{ t('dashboard.insights') }}</p>
+          <h2 class="mt-2 text-xl font-semibold">{{ t('dashboard.nextActions') }}</h2>
         </div>
 
         <div class="grid gap-3">
           <div
             v-for="item in tm('dashboard.actions')"
             :key="String(item)"
-            class="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-4 py-4 text-sm font-medium"
+            class="rounded-3xl border border-(--color-border) bg-(--color-surface-alt) px-4 py-4 text-sm font-medium"
           >
             {{ item }}
           </div>

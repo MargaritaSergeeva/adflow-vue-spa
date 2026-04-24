@@ -17,10 +17,10 @@ function resolveTone(status: Campaign['status']) {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-[24px] border border-[var(--color-border)]">
+  <div class="overflow-hidden rounded-[24px] border border-(--color-border)">
     <table class="min-w-full border-collapse">
       <thead
-        class="bg-[var(--color-surface-alt)] text-left text-xs uppercase tracking-[0.12em] text-[var(--color-text-secondary)]"
+        class="bg-(--color-surface-alt) text-left text-xs uppercase tracking-[0.12em] text-(--color-text-secondary)"
       >
         <tr>
           <th class="px-4 py-3">Name</th>
@@ -33,24 +33,24 @@ function resolveTone(status: Campaign['status']) {
           <th class="px-4 py-3">Owner</th>
         </tr>
       </thead>
-      <tbody class="bg-[var(--color-surface)]">
+      <tbody class="bg-(--color-surface)">
         <tr
           v-for="campaign in campaigns"
           :key="campaign.id"
-          class="border-t border-[var(--color-border)]"
+          class="border-t border-(--color-border)"
         >
           <td class="px-4 py-4 font-semibold">{{ campaign.name }}</td>
           <td class="px-4 py-4">
             <AppBadge :tone="resolveTone(campaign.status)">{{ campaign.status }}</AppBadge>
           </td>
-          <td class="px-4 py-4 capitalize text-[var(--color-text-secondary)]">
+          <td class="px-4 py-4 capitalize text-(--color-text-secondary)">
             {{ campaign.channel }}
           </td>
           <td class="px-4 py-4">${{ formatCompactNumber(campaign.budget) }}</td>
           <td class="px-4 py-4">${{ formatCompactNumber(campaign.spent) }}</td>
           <td class="px-4 py-4">{{ campaign.ctr }}%</td>
           <td class="px-4 py-4">{{ formatCompactNumber(campaign.conversions) }}</td>
-          <td class="px-4 py-4 text-[var(--color-text-secondary)]">{{ campaign.owner }}</td>
+          <td class="px-4 py-4 text-(--color-text-secondary)">{{ campaign.owner }}</td>
         </tr>
       </tbody>
     </table>
